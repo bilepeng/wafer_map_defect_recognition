@@ -27,7 +27,7 @@ Four configurations are compared: a plain CNN trained with ordinary cross entrop
 
 ### Confusion matrices
 
-Row-normalized confusion matrices (each row sums to 1, so a cell is the fraction of true samples of that class predicted as the column class) for the final model of each configuration (diagonal elements are correct predictions and off-diagonal elements are false predictions):
+Row-normalized confusion matrices (each row sums to 1, so a cell is the fraction of true samples of that class predicted as the column class) for the final model of each configuration (diagonal elements are correct predictions and off-diagonal elements are false predictions. Obviously, the final solution cost matrix + balancing + permutation-invariant E2CNN has the most "diagonal" confusion matrix):
 
 ![Confusion matrices](docu/confusion_matrices.png)
 
