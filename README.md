@@ -14,6 +14,10 @@ This project trains a neural network on the [LSWMD](http://mirlab.org/dataSet/pu
 Three complementary methods are used to address the two challenges above.
 
 1. **Cost-sensitive loss.** A 9x9 cost matrix encodes the price of every possible mistake, and a customized loss function computes the expected cost of the predicted class distribution against this matrix rather than plain cross entropy. Training with the cost matrix from scratch converges poorly, so the network is first trained with standard cross entropy and then fine-tuned with the cost-sensitive loss.
+
+    ![Cost matrix](docu/cost_matrix.png)
+
+    The cost matrix is shown here in the same layout as a confusion matrix (rows are the true class, columns the predicted class). Diagonal elements are 0 because they correspond to a correct classification, which carries no cost. Off-diagonal elements are the price of that specific mistake: confusing one defect type for another costs 1, missing a real defect and predicting "none" costs 2, and missing a defect that is especially costly to overlook in production (Edge-Ring, Near-full) and predicting "none" costs 3. This particular cost matrix is just an example; in practice it should be adapted to reflect the actual cost of each failure mode in the manufacturing process it is applied to.
 2. **Data balancing.** A weighted sampler draws minority-class samples more frequently during training, so the rare defect types are seen often enough to be learned.
 3. **Rotation-equivariant architecture (E2CNN).** A wafer is round, and a defect's identity does not depend on how the wafer happens to be rotated. [E2CNN](https://github.com/quva-lab/e2cnn) builds this rotation equivariance into the network architecture (see the animation in the repo's "demo" section), which restricts the network's degrees of freedom in unwanted directions (the relationship between orientation and defect type) and lets it generalize better from fewer samples.
 
