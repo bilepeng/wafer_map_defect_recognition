@@ -19,7 +19,12 @@ Three complementary methods are used to address the two challenges above.
 
     The cost matrix is shown here in the same layout as a confusion matrix (rows are the true class, columns the predicted class). Diagonal elements are 0 because they correspond to a correct classification, which carries no cost. Off-diagonal elements are the price of that specific mistake: confusing one defect type for another costs 1, missing a real defect and predicting "none" costs 2, and missing a defect that is especially costly to overlook in production (Edge-Ring, Near-full) and predicting "none" costs 3. This particular cost matrix is just an example; in practice it should be adapted to reflect the actual cost of each failure mode in the manufacturing process it is applied to.
 2. **Data balancing.** A weighted sampler draws minority-class samples more frequently during training, so the rare defect types are seen often enough to be learned.
-3. **Rotation-equivariant architecture (E2CNN).** A wafer is round, and a defect's identity does not depend on how the wafer happens to be rotated. [E2CNN](https://github.com/quva-lab/e2cnn) builds this rotation equivariance into the network architecture (see the animation in the repo's "demo" section), which restricts the network's degrees of freedom in unwanted directions (the relationship between orientation and defect type) and lets it generalize better from fewer samples.
+3. **Rotation-equivariant architecture (E2CNN).** A wafer is round, and a defect's identity does not depend on how the wafer happens to be rotated. [E2CNN](https://github.com/quva-lab/e2cnn) builds this rotation equivariance into the network architecture (see the animation in the repo's "demo" section), which restricts the network's degrees of freedom in unwanted directions (the relationship between orientation and defect type) and lets it generalize better from fewer samples, as shown below:
+
+    ![Conventional CNN](docu/conventional_cnn.gif)
+    ![Vector field](docu/vectorfield.gif)
+
+    A conventional CNN's feature maps (left) do not transform predictably when the input is rotated, while E2CNN's feature fields (right) force to rotate consistently with the input, which is what gives the network its rotation equivariance. Images from [e2cnn](https://github.com/quva-lab/e2cnn).
 
 Four configurations are compared: a plain CNN trained with ordinary cross entropy, a CNN trained with the cost matrix but without data balancing, a CNN trained with both the cost matrix and data balancing, and an E2CNN trained with both the cost matrix and data balancing.
 
