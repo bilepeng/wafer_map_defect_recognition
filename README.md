@@ -9,6 +9,8 @@ This project trains a neural network on the [LSWMD](http://mirlab.org/dataSet/pu
 1. **Asymmetric error cost.** The price of a recognition error is not the same for every error. A false alarm mostly wastes an engineer's time, while missing a real defect is much more costly, and some defect types are similar to each other and share similar root causes, so confusing them is less severe than confusing entirely unrelated types. Standard cross entropy does not capture any of this, since it treats every misclassification identically.
 2. **Class imbalance.** LSWMD is heavily imbalanced. The "none" (no defect) class dominates the dataset, while some defect types have very few samples, which makes it difficult to train a network that recognizes them reliably.
 
+A machine learning model here cannot be a standalone component bolted onto the manufacturing line; it has to be aligned with the rest of the process, taking the real costs and physical properties of the system into account. A standard CNN trained with plain cross entropy is insufficient for this, since it optimizes for a generic notion of accuracy rather than the actual cost structure and physical constraints of wafer manufacturing. In the following, I show how these system properties are "translated" into the machine learning design specifically for this problem.
+
 ## Approach
 
 Three complementary methods are used to address the two challenges above.
