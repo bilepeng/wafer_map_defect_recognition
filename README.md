@@ -15,7 +15,7 @@ A machine learning model here cannot be a standalone component bolted onto the m
 
 Three complementary methods are used to address the two challenges above.
 
-1. **Cost-sensitive loss.** A 9x9 cost matrix encodes the price of every possible mistake, and a customized loss function computes the expected cost of the predicted class distribution against this matrix rather than plain cross entropy. Training with the cost matrix from scratch converges poorly, so the network is first trained with standard cross entropy and then fine-tuned with the cost-sensitive loss.
+1. **Cost-sensitive loss.** Standard cross entropy treats all misclassifications equally — but missing a real defect is far more costly than raising a false alarm, and confusing two structurally similar defect types is less severe than missing a defect entirely. A 9x9 cost matrix encodes the price of every possible mistake, and a customized loss function computes the expected cost of the predicted class distribution against this matrix rather than plain cross entropy. Training with the cost matrix from scratch converges poorly, so the network is first trained with standard cross entropy and then fine-tuned with the cost-sensitive loss.
 
     ![Cost matrix](docu/cost_matrix.png)
 
@@ -38,7 +38,7 @@ Four configurations are compared: a plain CNN trained with ordinary cross entrop
 
 ### Confusion matrices
 
-Row-normalized confusion matrices (each row sums to 1, so a cell is the fraction of true samples of that class predicted as the column class) for the final model of each configuration (diagonal elements are correct predictions and off-diagonal elements are false predictions. Obviously, the final solution cost matrix + balancing + permutation-invariant E2CNN has the most "diagonal" confusion matrix):
+Row-normalized confusion matrices (each row sums to 1, so a cell is the fraction of true samples of that class predicted as the column class) for the final model of each configuration (diagonal elements are correct predictions and off-diagonal elements are false predictions. Obviously, the final solution cost matrix + balancing + rotation-invariant E2CNN has the most "diagonal" confusion matrix):
 
 ![Confusion matrices](docu/confusion_matrices.png)
 
