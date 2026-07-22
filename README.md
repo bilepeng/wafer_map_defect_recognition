@@ -30,6 +30,17 @@ Three complementary methods are used to address the two challenges above.
 
 Four configurations are compared: a plain CNN trained with ordinary cross entropy, a CNN trained with the cost matrix but without data balancing, a CNN trained with both the cost matrix and data balancing, and an E2CNN trained with both the cost matrix and data balancing.
 
+## Usage
+
+Download the [LSWMD](https://www.kaggle.com/datasets/qingyi/wm811k-wafer-map) (WM-811K) dataset, decompress it, and put it in the `data/` folder. Then run training with `main.py`:
+
+The script accepts the following arguments:
+
+* `--save` (bool, default `True`) — whether to save model checkpoints and TensorboardX logs.
+* `--model` — model type to train, either `cnn` (baseline CNN) or `e2cnn` (rotation-equivariant CNN).
+* `--data-balancing` (bool, default `False`) — whether to use a weighted random sampler to balance minority defect classes during training.
+* `--use-cost-sensitive-loss` (bool, default `True`) — whether to switch from cross entropy to the cost-sensitive loss (using the cost matrix) halfway through training.
+
 ## Results
 
 ### Per-class test accuracy during training
