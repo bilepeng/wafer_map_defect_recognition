@@ -26,7 +26,7 @@ Three complementary methods are used to address the two challenges above.
     ![Conventional CNN](docu/conventional_cnn.gif)
     ![Vector field](docu/vectorfield.gif)
 
-    A conventional CNN's feature maps (left) do not transform predictably when the input is rotated, while E2CNN's feature fields (right) force to rotate consistently with the input, which is what gives the network its rotation equivariance. Images from [e2cnn](https://github.com/quva-lab/e2cnn).
+    A conventional CNN's feature maps (top) do not transform predictably when the input is rotated, while E2CNN's feature fields (bottom) force to rotate consistently with the input, which is what gives the network its rotation equivariance. Images from [e2cnn](https://github.com/quva-lab/e2cnn).
 
 Four configurations are compared: a plain CNN trained with ordinary cross entropy, a CNN trained with the cost matrix but without data balancing, a CNN trained with both the cost matrix and data balancing, and an E2CNN trained with both the cost matrix and data balancing.
 
